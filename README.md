@@ -1,3 +1,10 @@
+## 概要
+https://yumemi.notion.site/0e9ef27b55704d7882aab55cc86c999d
+
+## 注意事項・よくある質問
+https://note.yumemi.co.jp/n/ned7429b59556
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
