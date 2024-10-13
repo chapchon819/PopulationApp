@@ -1,33 +1,37 @@
-import React, { useRef } from 'react';
-import * as Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
+import React, { useState } from 'react';
+import PrefectureList from './components/PrefectureList';
+import PopulationChart from './components/PopulationChart';
 
-// The wrapper exports only a default component that at the same time is a
-// namespace for the related Props interface (HighchartsReact.Props) and
-// RefObject interface (HighchartsReact.RefObject). All other interfaces
-// like Options come from the Highcharts module itself.
+const App: React.FC = () => {
+  const [selectedPrefectures, setSelectedPrefectures] = useState<{ prefCode: number; prefName: string }[]>([]);
 
-const options: Highcharts.Options = {
-    title: {
-        text: 'My chart'
-    },
-    series: [{
-        type: 'line',
-        data: [1, 2, 3]
-    }]
-};
-
-const App = (props: HighchartsReact.Props) => {
-  const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
+  // PrefectureList から選択された都道府県のコードと名前を取得
+  const handlePrefectureSelection = (selectedPrefCodesAndNames: { prefCode: number; prefName: string }[]) => {
+    setSelectedPrefectures(selectedPrefCodesAndNames);
+  };
 
   return (
-    <HighchartsReact
-      highcharts={Highcharts}
-      options={options}
-      ref={chartComponentRef}
-      {...props}
-    />
+    <div>
+      <h1 className='m-8'>都道府県別人口データ</h1>
+      <div className="flex w-11/12 h-screen">
+        <div className="w-1/3 mx-8 h-screen relative">
+          <div className='absolute h-full w-full pb-8 overflow-y-scroll'>
+            {/* 都道府県リストを表示 */}
+            <PrefectureList onSelectionChange={handlePrefectureSelection} />
+          </div>
+        </div>
+        <div className="w-2/3">
+          {/* 選択された都道府県の人口データを表示 */}
+          {selectedPrefectures.length > 0 ? (
+            <PopulationChart selectedPrefectures={selectedPrefectures} />
+          ) : (
+            <p>都道府県を選択してください。</p>
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
+
 
 export default App;
