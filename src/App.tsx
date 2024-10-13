@@ -14,13 +14,13 @@ const App: React.FC = () => {
     <div>
       <h1 className='m-8'>都道府県別人口データ</h1>
       <div className="flex w-11/12 h-screen">
-        <div className="w-1/3 mx-8 h-screen relative">
+        <div className="w-1/4 mx-8 h-screen relative">
           <div className='absolute h-full w-full pb-8 overflow-y-scroll'>
             {/* 都道府県リストを表示 */}
             <PrefectureList onSelectionChange={handlePrefectureSelection} />
           </div>
         </div>
-        <div className="w-2/3">
+        <div className="w-3/4">
           {/* 選択された都道府県の人口データを表示 */}
           {selectedPrefectures.length > 0 ? (
             <PopulationChart selectedPrefectures={selectedPrefectures} />
