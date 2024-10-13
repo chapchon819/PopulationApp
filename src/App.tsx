@@ -1,7 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PrefectureList from './components/PrefectureList';
+import PopulationChart from './components/PopulationChart';
 
-function App() {
-  return <h1 className="text-3xl font-bold underline decoration-green-300">Hello world!</h1>;
-}
+const App: React.FC = () => {
+  const [selectedPrefectures, setSelectedPrefectures] = useState<{ prefCode: number; prefName: string }[]>([]);
+
+  // PrefectureList から選択された都道府県のコードと名前を取得
+  const handlePrefectureSelection = (selectedPrefCodesAndNames: { prefCode: number; prefName: string }[]) => {
+    setSelectedPrefectures(selectedPrefCodesAndNames);
+  };
+
+  return (
+    <div>
+      <h1 className='m-8'>都道府県別人口データ</h1>
+      <div className="flex w-11/12 h-screen">
+        <div className="w-1/4 mx-8 h-screen relative">
+          <div className='absolute h-full w-full pb-8 overflow-y-scroll'>
+            {/* 都道府県リストを表示 */}
+            <PrefectureList onSelectionChange={handlePrefectureSelection} />
+          </div>
+        </div>
+        <div className="w-3/4">
+          {/* 選択された都道府県の人口データを表示 */}
+          {selectedPrefectures.length > 0 ? (
+            <PopulationChart selectedPrefectures={selectedPrefectures} />
+          ) : (
+            <p>都道府県を選択してください。</p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 
 export default App;

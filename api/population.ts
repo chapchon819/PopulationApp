@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import axios from 'axios'
-import { apiResponse, PopulationData } from '../src/types/index'
+import { apiResponse, PopulationData, PopulationLabel } from '../src/types/index'
 
 
 const API_URL = 'https://opendata.resas-portal.go.jp/api/v1/'
