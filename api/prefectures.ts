@@ -15,7 +15,6 @@ async function fetchPrefectures(): Promise<apiResponse<Prefectures>> {
             },
         })
         const data = response.data
-        console.log('API Response:', data)
         return data
     } catch (error) {
         console.error('API Error:', error)

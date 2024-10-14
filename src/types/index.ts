@@ -16,3 +16,8 @@ export type PopulationData = {
     rate?: number
 }
 
+export type ChartSeries = {
+    name: string;
+    data: number[];
+}
+

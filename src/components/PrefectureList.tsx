@@ -14,7 +14,7 @@ const PrefectureList: React.FC<PrefectureListProps> = ({ onSelectionChange }) =>
     const fetchPrefectures = async () => {
       try {
         const response = await axios.get('/api/prefectures');
-        setPrefectures(response.data.result); // APIレスポンスの都道府県データ
+        setPrefectures(response.data.result);
       } catch (error) {
         console.error('Failed to fetch prefectures:', error);
       }
@@ -34,7 +34,7 @@ const PrefectureList: React.FC<PrefectureListProps> = ({ onSelectionChange }) =>
 
   return (
     <div>
-      <h2>都道府県一覧</h2>
+      <h2 className='py-4 font-semibold'>都道府県一覧</h2>
       <ul>
         {prefectures.map((prefecture) => (
           <li className='my-2' key={prefecture.prefCode}>

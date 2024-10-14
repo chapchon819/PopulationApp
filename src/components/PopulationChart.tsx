@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import * as Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import axios from 'axios';
-import { PopulationData } from '../types/index';
+import { PopulationData, ChartSeries } from '../types/index';
 
 type PopulationChartProps = {
     selectedPrefectures: { prefCode: number; prefName: string }[];
     };
 
     const PopulationChart: React.FC<PopulationChartProps> = ({ selectedPrefectures }) => {
-    const [chartData, setChartData] = useState<any[]>([]);
+    const [chartData, setChartData] = useState<ChartSeries[]>([]);
     const [years, setYears] = useState<number[]>([]);
     const [selectedCategory, setSelectedCategory] = useState<string>('総人口');
 
