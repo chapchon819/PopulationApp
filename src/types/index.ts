@@ -16,8 +16,3 @@ export type PopulationData = {
     rate?: number
 }
 
-export type PopulationLabel = {
-    label: string
-    data: PopulationData[]
-}
-

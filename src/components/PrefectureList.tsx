@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Prefectures } from '../types/index'; // 必要に応じて正しいパスに変更してください
+import { Prefectures } from '../types/index';
 
 type PrefectureListProps = {
   onSelectionChange: (selectedPrefCodesAndNames: { prefCode: number; prefName: string }[]) => void;
