@@ -6,19 +6,22 @@ import { PopulationData } from '../types/index';
 
 type PopulationChartProps = {
     selectedPrefectures: { prefCode: number; prefName: string }[];
-  };
-  
-  const PopulationChart: React.FC<PopulationChartProps> = ({ selectedPrefectures }) => {
+    };
+
+    const PopulationChart: React.FC<PopulationChartProps> = ({ selectedPrefectures }) => {
     const [chartData, setChartData] = useState<any[]>([]);
     const [years, setYears] = useState<number[]>([]);
-  
+    const [selectedCategory, setSelectedCategory] = useState<string>('総人口');
+
     useEffect(() => {
         const fetchPopulationData = async () => {
         const promises = selectedPrefectures.map(async (pref) => {
             try {
                     // 都道府県の人口データを取得
                     const response = await axios.get(`/api/population?prefCode=${pref.prefCode}&cityCode=-`);
-                    const data = response.data.result.data[0].data; // 総人口データを取得
+                    const data = response.data.result.data.find(
+                        (categoryData: { label: string }) => categoryData.label === selectedCategory
+                    )?.data;
 
                     // データが持っている年を取得
                     const yearsFromData = data.map((item: PopulationData) => item.year);
@@ -45,7 +48,7 @@ type PopulationChartProps = {
         if (selectedPrefectures.length > 0) {
         fetchPopulationData();
         }
-    }, [selectedPrefectures]);
+    }, [selectedPrefectures, selectedCategory]);
 
     const chartOptions: Highcharts.Options = {
         title: {
@@ -64,9 +67,22 @@ type PopulationChartProps = {
             data: series.data,
         })),
     };
-  
+
     return (
         <div>
+            <div className="mb-4">
+                <label className="mr-4">人口の種類：</label>
+                <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="p-2 border rounded"
+                >
+                    <option value="総人口">総人口</option>
+                    <option value="年少人口">年少人口</option>
+                    <option value="生産年齢人口">生産年齢人口</option>
+                    <option value="老年人口">老年人口</option>
+                </select>
+            </div>
             <HighchartsReact highcharts={Highcharts} options={chartOptions} />
         </div>
         );
