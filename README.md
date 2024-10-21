@@ -1,8 +1,10 @@
-### 概要
+### 課題概要
 https://yumemi.notion.site/0e9ef27b55704d7882aab55cc86c999d
 
 ### 注意事項・よくある質問
 https://note.yumemi.co.jp/n/ned7429b59556
+
+---------------
 
 ### 参考記事
 - [PrettierとESLintの導入備忘録](https://zenn.dev/hironobu0824/articles/prettier_eslint_memo)
